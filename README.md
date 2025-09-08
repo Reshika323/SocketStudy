@@ -37,11 +37,46 @@ To perform a study on Socket Programming
 •	They then listen for incoming connections with listen() and accept connections with accept().
 •	Once a connection is establi
 •	shed, servers can send and receive data using send() and recv().
+```
+import socket 
+s=socket.socket() 
+s.connect(('localhost',8000)) 
+print(s.getsockname()) 
+print(s.recv(1024).decode()) 
+s.send("acknowledgement recived from the server".encode())
+```
+## Output:
+![WhatsApp Image 2025-09-05 at 13 15 42_b6527bad](https://github.com/user-attachments/assets/9a8d1cf7-e80f-4c87-9fb3-20cf5b59cf77)
 
 ## Client –Server Operations
 
 Clients create a socket using socket() and connect to a server using connect().
 After establishing a connection, clients can send and receive data using send() and recv().
+```
+import socket
+ from datetime import datetime
+ 
+s=socket.socket()
+ 
+s.bind(('localhost',6000))
+ 
+s.listen(5)
+ c,addr=s.accept()
+ print("Client Address : ",addr)
+ 
+now = datetime.now()
+ 
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ ack=c.recv(1024).decode()
+ 
+if ack:
+    print(ack)
+ 
+c.close()
+```
+## Output:
+![WhatsApp Image 2025-09-05 at 13 15 43_63285a19](https://github.com/user-attachments/assets/3a4fc110-92ee-4611-b8e9-f9cfbce22ead)
+
 
 ## Use Cases of Socket Programming:
 Socket programming finds applications in various domains, including web development, file transfer protocols, online gaming, and real-time communication. It is the foundation for protocols like HTTP, FTP, and SMTP, which power the internet. Socket programming enables the development of both server and client applications, facilitating the exchange of information between devices in a networked environment.
